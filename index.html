@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        /* start variables */
+        :root {
+            --bg-color: #18191A;
+            --bg-dark: #212529;
+            --sec-color: #303031;
+            --secondry-color: #c0b7ab;
+            --hover-color: #4e4f5079;
+            --text-color: #e9edf3;
+            --drawer-icon-color: #5781d6;
+            --scrollbar-color: rgba(128, 128, 128, 0.651);
+            --hr-color: #c0b7ab75;
+            --active-color: #6F4E37;
+            --main-duration: 0.2s;
+        }
+
+        /* end variables */
+        /* start global rules */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* start scroll bar */
+        /* width */
+        article::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Handle */
+        article::-webkit-scrollbar-thumb {
+            visibility: hidden;
+            background: var(--active-color);
+            border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        article::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+            visibility: visible;
+        }
+
+        article:hover::-webkit-scrollbar-thumb {
+            background: -var(--active-color);
+            visibility: visible;
+        }
+
+        /* order-list */
+        /* width */
+        .order-list::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        /* Handle */
+        .order-list::-webkit-scrollbar-thumb {
+            visibility: hidden;
+            background: var(--active-color);
+            border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        .order-list::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+            visibility: visible;
+        }
+
+        .order-list:hover::-webkit-scrollbar-thumb {
+            background: -var(--active-color);
+            visibility: visible;
+        }
+
+        /* end scroll bar */
+
+        .primary-bg {
+            background-color: var(--bg-color) !important;
+        }
+
+        .accent-bg {
+            background-color: var(--bg-dark);
+        }
+
+        .secondry-bg {
+            background-color: var(--sec-color);
+        }
+
+        .hover-bg {
+            background-color: var(--hover-color);
+        }
+
+        .primary-text {
+            color: var(--text-color);
+        }
+
+        .accent-text {
+            color: var(--secondry-color);
+        }
+
+        section {
+            height: calc(100vh - 56px);
+        }
+
+        section article nav a {
+            margin: 5px 10px;
+            background-color: var(--bg-color) !important;
+        }
+
+        section article nav a:hover {
+            background-color: var(--hover-color) !important;
+            color: var(--text-color) !important;
+        }
+
+        .active-cat {
+            background-color: var(--active-color) !important;
+            color: var(--text-color) !important;
+        }
+
+        .active-color {
+            color: var(--active-color) !important;
+        }
+
+        .product-card .card:hover {
+            background-color: var(--hover-color) !important;
+            color: var(--text-color) !important;
+            cursor: pointer;
+            transform: scale(1.005);
+            transition: var(--main-duration);
+        }
+
+        body {
+            background-image: linear-gradient(#212529, #18191A, #4e4f5079, #303031);
+        }
+
+        .order-list {
+            height: 55vh;
+            overflow-y: auto;
+            margin: 0 !important;
+            padding: 0 !important;
+            /* overflow-x: hidden; */
+        }
+
+        .bill-list {
+            height: 23vh;
+        }
+
+        /* end global rules */
+        /* Google fonts import link */
+
+        .order-card {
+            width: 95%;
+            margin: auto;
+        }
+
+        .wrapper {
+            height: 40x;
+            min-width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFF;
+            border-radius: 12px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .wrapper span {
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            background-color: var(--active-color);
+            color: var(--text-color);
+        }
+
+        .wrapper span:hover {
+            background-color: var(--bg-dark) !important;
+            color: var(--text-color) !important;
+        }
+
+        .wrapper span.num {
+            font-size: 18px;
+            border-right: 2px solid rgba(0, 0, 0, 0.2);
+            border-left: 2px solid rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+            background-color: var(--sec-color);
+            color: var(--text-color);
+            background-color: var(--sec-color);
+            color: var(--text-color);
+        }
+    </style>
+</head>
+
+<body class="accent-bg">
+    <nav class="navbar primary-bg">
+        <div class="container-fluid d-flex">
+            <a class="navbar-brand primary-text fw-bold">Cafeteria</a>
+
+            <form class="d-flex" role="search">
+                <input class="form-control me-2 accent-bg primary-text border-0 " type="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-outline-success me-3" type="submit">Search</button>
+            </form>
+
+
+            <div class="input-group w-auto">
+                <label class="input-group-text active-cat border-0" for="inputGroupSelect01">User</label>
+                <select class="form-select accent-bg primary-text border-0" id="inputGroupSelect01">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+
+        </div>
+
+    </nav>
+    <section class="d-flex">
+        <article class="col-6 col-md-7 col-lg-8 col-xl-9 px-5 py-3 overflow-y-auto">
+            <nav class="nav nav-pills flex-column flex-sm-row ">
+                <a class="flex-sm-fill text-sm-center nav-link text-white-50 active-cat" aria-current="page"
+                    href="#">Active</a>
+                <a class="flex-sm-fill text-sm-center nav-link text-white-50" href="#">Longer nav link</a>
+                <a class="flex-sm-fill text-sm-center nav-link text-white-50" href="#">Link</a>
+                <a class="flex-sm-fill text-sm-center nav-link text-white-50" href="#">Link</a>
+                <a class="flex-sm-fill text-sm-center nav-link text-white-50" href="#">Link</a>
+            </nav>
+            <div class="row row-cols-auto py-3">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2 product-card">
+                    <div class="card text-white primary-bg">
+                        <i class="fab fa-apple fa-lg"></i>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/3.webp"
+                            class="card-img-top" alt="" />
+                        <div class="card-body ">
+                            <h5 class="card-title">Milk Tea</h5>
+                            <p class="text-white-50 mb-2">Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. </p>
+                            <div class="d-flex">
+                                <span class="active-color fw-bold me-2">$90</span><span
+                                    class="text-white-50">/1pcs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2 product-card">
+                    <div class="card text-white primary-bg">
+                        <i class="fab fa-apple fa-lg"></i>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/3.webp"
+                            class="card-img-top" alt="" />
+                        <div class="card-body ">
+                            <h5 class="card-title">Milk Tea</h5>
+                            <p class="text-white-50 mb-2">Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. </p>
+                            <div class="d-flex">
+                                <span class="active-color fw-bold me-2">$90</span><span
+                                    class="text-white-50">/1pcs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2 product-card">
+                    <div class="card text-white primary-bg">
+                        <i class="fab fa-apple fa-lg"></i>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/3.webp"
+                            class="card-img-top" alt="" />
+                        <div class="card-body ">
+                            <h5 class="card-title">Milk Tea</h5>
+                            <p class="text-white-50 mb-2">Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. </p>
+                            <div class="d-flex">
+                                <span class="active-color fw-bold me-2">$90</span><span
+                                    class="text-white-50">/1pcs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2 product-card">
+                    <div class="card text-white primary-bg">
+                        <i class="fab fa-apple fa-lg"></i>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/3.webp"
+                            class="card-img-top" alt="" />
+                        <div class="card-body ">
+                            <h5 class="card-title">Milk Tea</h5>
+                            <p class="text-white-50 mb-2">Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. </p>
+                            <div class="d-flex">
+                                <span class="active-color fw-bold me-2">$90</span><span
+                                    class="text-white-50">/1pcs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2 product-card">
+                    <div class="card text-white primary-bg">
+                        <i class="fab fa-apple fa-lg"></i>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/3.webp"
+                            class="card-img-top" alt="" />
+                        <div class="card-body ">
+                            <h5 class="card-title">Milk Tea</h5>
+                            <p class="text-white-50 mb-2">Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. </p>
+                            <div class="d-flex">
+                                <span class="active-color fw-bold me-2">$90</span><span
+                                    class="text-white-50">/1pcs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </article>
+        <article class="col-6 col-md-5 col-lg-4 col-xl-3 p-4 primary-bg mt-1">
+            <h3 class="primary-text">Current Order</h3>
+            <div class="order-list">
+                <div class="row mb-3 order-card">
+                    <div class="card border-0 rounded-3 accent-bg">
+                        <div class="card-body">
+                            <button type="button" class="btn-close float-end" aria-label="Close"></button>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="rounded ">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(4).webp"
+                                            class="w-100" />
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <h5 class="accent-text">name</h5>
+                                    </div>
+                                    <div class="mb-2 active-color">
+                                        <span>10$ / 1pcs</span>
+                                    </div>
+                                    <div class="wrapper">
+                                        <span class="minus">-</span>
+                                        <span class="num">01</span>
+                                        <span class="plus">+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bill-list d-flex flex-column  align-items-stretch justify-content-end">
+                <div class="input-group mb-3">
+                    <span class="input-group-text active-cat border-0">Notes</span>
+                    <textarea class="form-control accent-bg primary-text border-0"
+                        aria-label="With textarea"></textarea>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text active-cat border-0" for="inputGroupSelect01">Room NO</label>
+                    <select class="form-select accent-bg primary-text border-0" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-between px-3 mt-3">
+                    <h4 class="primary-text">Total</h4>
+                    <h4 class="primary-text">20 pt</h4>
+                </div>
+                <button class="btn btn-success col-12 mt-2" type="button">Confirm</button>
+
+            </div>
+        </article>
+    </section>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script>
+        const plus = document.querySelector(".plus"),
+            minus = document.querySelector(".minus"),
+            num = document.querySelector(".num");
+        let a = 1;
+        plus.addEventListener("click", () => {
+            a++;
+            a = (a < 10) ? "0" + a : a;
+            num.innerText = a;
+        });
+
+        minus.addEventListener("click", () => {
+            if (a > 1) {
+                a--;
+                a = (a < 10) ? "0" + a : a;
+                num.innerText = a;
+            }
+        });
+
+    </script>
+</body>
+
+</html>
