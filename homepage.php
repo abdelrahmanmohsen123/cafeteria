@@ -495,27 +495,26 @@
         crossorigin="anonymous"></script>
         <script src="js/jquery-3.5.1.js"></script>
     <script>
+        
         let plus = document.querySelectorAll(".plus"),
             minus = document.querySelectorAll(".minus"),
-            total = 0,
+            // total = 0,
             num = document.querySelectorAll(".num");
             let result =0;            
             //  console.log(total);
                   
 
         let subtotal = document.querySelectorAll(".subtotal");
+        let total = 0;
         let price = document.querySelectorAll(".price");
-        
-
- 
 
 
-         for (let index = 0; index < subtotal.length; index++) {
+        for (let index = 0; index < subtotal.length; index++) {
             
               
             subtotal[index].innerText = Number(num[index].innerText) *  Number(price[index].innerText); 
-           total +=Number(subtotal[index].innerText);  
-           console.log(total+ "sfwefewf")
+            total +=Number(subtotal[index].innerText);  
+            console.log(total+ "sfwefewf")
            result +=Number(subtotal[index].innerText);
             //   console.log(result);
             // console.log(Number(price[index].innerText)+"hi" ); 
@@ -534,20 +533,24 @@
 
                  let newVar  = Number(subtotal[index].innerText);
                 console.log(subtotal[index].innerText + "after");
-                total += Number(subtotal[index].innerText);
-                console.log((total) + "total in plus");
+                // total += Number(subtotal[index].innerText);
+                
                 let newval = subtotal[index].innerText;
                 let dev = newval - result;
-                result += dev; 
-                
+                result += dev;                 
                 console.log(result +"resul")
-                 document.querySelector(".total").value = total + (newVar - oldvar) ;
-                // for (let index = 0; index < array.length; index++) {
-                //     const element = array[index];
-                    
-                // }
-                // total +=Number(subtotal[index].innerText);
-                // document.querySelector(".total").innerText = total;
+
+                // total
+                subtotal = document.querySelectorAll(".subtotal");
+                total = 0;
+                for(let i=0; i<subtotal.length; i++){
+                    total += Number(subtotal[i].innerText); 
+                    console.log(subtotal[i].innerText)
+                }
+                document.querySelector(".total").value = total;
+
+
+                
             });
 
             minus[index].addEventListener("click", () => {
@@ -560,20 +563,26 @@
                     // total +=Number(subtotal[index].innerText);
                     
                     // document.querySelector(".total").innerText = total;
+
+                    // total
+                    subtotal = document.querySelectorAll(".subtotal");
+                    total = 0;
+                    for(let i=0; i<subtotal.length; i++){
+                        total += Number(subtotal[i].innerText); 
+                    }
+                    document.querySelector(".total").value = total;
                 }
             });
-            
-            
-            
-         }   
-        console.log(total)
-          document.querySelector(".total").value = total;
-       
-        
 
+        }  
 
-        
-        
+        // total
+        total = 0;
+        for(let i=0; i<subtotal.length; i++){
+            total += Number(subtotal[i].innerText); 
+            console.log(subtotal[i])
+        }
+        document.querySelector(".total").value = total;
 
     </script>
 </body>
