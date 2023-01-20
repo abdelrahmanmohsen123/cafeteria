@@ -60,7 +60,7 @@
                 <a class="nav-link border-end" href="homepage.php">Manual Order</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link border-end" href="admin_orders">Checks</a>
+                <a class="nav-link border-end" href="admin_orders.php">Checks</a>
                 </li>
                
                
@@ -151,7 +151,8 @@
                 </table>
         </div>
     </div>
+    <script src="./lab.js"></script>
 </body>
-<script src="./lab.js"></script>
+
 
 </html>
