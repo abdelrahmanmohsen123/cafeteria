@@ -28,7 +28,7 @@ include_once 'database.php';
                 if($updated){
     
                     $_SESSION['updated_password'] = 'Success reset password';;
-                    header('location:login.php');
+                    header('location:index.php');
     
     
                 }else{

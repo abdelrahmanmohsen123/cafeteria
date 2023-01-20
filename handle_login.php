@@ -20,7 +20,7 @@ include_once 'database.php';
 
             }else{
                 $_SESSION['error_login'] = 'not aauthencable';
-                header('location:login.php');
+                header('location:index.php');
             }
             // $query = `Update  users set id=$id ,first_name =$first_name ,last_name=$last_name , phone = $phone 
             
