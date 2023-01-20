@@ -3,20 +3,27 @@ session_start();
 include 'database.php';
 include 'database.php';
 
-    $query = 'SELECT * FROM USERS WHERE is_admin = 1'  ;          
-    $sql = $conn->prepare($query);
-    $result  = $sql->execute();
-    
-    $user = $sql->fetch();
+$query = 'SELECT * FROM USERS WHERE is_admin = 1';
+$sql = $conn->prepare($query);
+$result  = $sql->execute();
 
-if(isset($_GET['id'])){
+$user = $sql->fetch();
+
+if (isset($_GET['id'])) {
     $id_user = $_GET['id'];
-    $query = 'SELECT * FROM products WHERE id = ?'  ;          
+    $query = 'SELECT * FROM products WHERE id = ?';
     $sql = $conn->prepare($query);
     $result  = $sql->execute([$id_user]);
-    
-    $product = $sql->fetch();
 
+    $product = $sql->fetch();
+}
+if (isset($_GET)) {
+
+    $query = 'SELECT * FROM category';
+    $sql = $conn->prepare($query);
+    $result  = $sql->execute();
+
+    $categories = $sql->fetchAll();
 }
 
 ?>
@@ -50,10 +57,10 @@ if(isset($_GET['id'])){
                             <a class="nav-link active border-end" aria-current="page" href="homepage.php">Home</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link border-end" href="all_products.php">Products</a>
+                            <a class="nav-link border-end" href="all_products.php">Products</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link border-end" href="all_users.php">Users</a>
+                            <a class="nav-link border-end" href="all_users.php">Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link border-end" href="homwpage.php">Manual Order</a>
@@ -65,8 +72,8 @@ if(isset($_GET['id'])){
 
                     </ul>
                     <div class="d-flex">
-                    <img src="<?php  echo $user['image'] ?>" class="rounded" style="width: 50px;" alt="">
-                    <p  class="mx-3"><?php  echo $user['username'] ?></p>
+                        <img src="<?php echo $user['image'] ?>" class="rounded" style="width: 50px;" alt="">
+                        <p class="mx-3"><?php echo $user['username'] ?></p>
                     </div>
                     <p class="mx-1 ">
                         <a class="btn btn-secondary mx-1 " href="logout.php">logout</a>
@@ -103,7 +110,7 @@ if(isset($_GET['id'])){
             <div class="row">
                 <div class="col-12">
                     <div class=" p-3  mx-auto my-3">
-                    <input type="hidden" name="id" value="<?php echo $product['id'] ?>">
+                        <input type="hidden" name="id" value="<?php echo $product['id'] ?>">
 
                         <div class="mb-3 row  ">
                             <label class="col-sm-3 col-form-label">Product Name</label>

@@ -2,7 +2,7 @@
 session_start();
 
 include_once 'database.php';
-$query10 = "SELECT * FROM users where is_admin = 1"  ;          
+$query10 = "SELECT * FROM users where is_admin = 1";
 $sql10 = $conn->prepare($query10);
 $result  = $sql10->execute();
 
@@ -14,7 +14,6 @@ if (isset($_GET)) {
     $result  = $sql->execute();
 
     $categories = $sql->fetchAll();
-
 }
 
 ?>
@@ -48,10 +47,10 @@ if (isset($_GET)) {
                             <a class="nav-link active border-end" aria-current="page" href="homepage.php">Home</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link border-end" href="all_products.php">Products</a>
+                            <a class="nav-link border-end" href="all_products.php">Products</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link border-end" href="all_users.php">Users</a>
+                            <a class="nav-link border-end" href="all_users.php">Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link border-end" href="homepage.php">Manual Order</a>
@@ -63,8 +62,8 @@ if (isset($_GET)) {
 
                     </ul>
                     <div class="d-flex">
-                    <img src="<?php  echo $user['image'] ?>" class="rounded" style="width: 50px;" alt="">
-                    <p  class="mx-3"><?php  echo $user['username'] ?></p>
+                        <img src="<?php echo $user['image'] ?>" class="rounded" style="width: 50px;" alt="">
+                        <p class="mx-3"><?php echo $user['username'] ?></p>
 
                     </div>
                 </div>
@@ -85,7 +84,7 @@ if (isset($_GET)) {
                 <div class="alert alert-danger w-50 m-auto text center">
                     <span>
                         <?php echo $err_product;
-                        unset($_SESSION['errors']['product'])
+                        unset($_SESSION['errors']['product']);
                         ?>
 
                     </span>
@@ -110,7 +109,7 @@ if (isset($_GET)) {
                             <div class="col-sm-8">
                                 <div class="row">
                                     <div class="col-6">
-                                        <input type="number" name="price" placeholder="2" class="form-control ">
+                                        <input type="number" name="price" placeholder="1" class="form-control ">
 
                                     </div>
                                     <div class="col-2">
@@ -155,7 +154,7 @@ if (isset($_GET)) {
                                         </span>
                                     </div>
 
-                                <?php session_unset();
+                                <?php unset($_SESSION['inserted_category']);
                                 } ?>
                             </div>
 
