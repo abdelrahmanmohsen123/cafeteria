@@ -12,8 +12,9 @@ include_once 'database.php';
             $user = $sql->fetch();
 
             if($user){
-
                 $_SESSION['email'] = $email;
+                $_SESSION['id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
                 header('location:homepage.php');
 
 

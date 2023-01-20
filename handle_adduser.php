@@ -11,7 +11,7 @@ include_once 'database.php';
         $confirm_password = $_POST['confirm_password'];
         $_SESSION['errors']['user'] =[];
         
-        var_dump($_POST);
+        
 
 
         $errors =0;

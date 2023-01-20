@@ -1,13 +1,15 @@
 <?php 
 session_start();
-include_once 'database.php';
-
-    $query10 = "SELECT * FROM users where is_admin = 1"  ;          
-    $sql10 = $conn->prepare($query10);
-    $result  = $sql10->execute();
+include 'database.php';
+if(isset($_GET['id'])){
+    $id_user = $_GET['id'];
+    $query = 'SELECT * FROM USERS WHERE id = ?'  ;          
+    $sql = $conn->prepare($query);
+    $result  = $sql->execute([$id_user]);
     
-    $user = $sql10->fetch();
+    $user = $sql->fetch();
 
+}
 
 ?>
 
@@ -18,7 +20,7 @@ include_once 'database.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Add User</title>
+    <title>Update User</title>
 </head>
 <style >
     body{
@@ -52,8 +54,8 @@ include_once 'database.php';
                
             </ul>
                 <div class="d-flex">
-                <img src="<?php  echo $user['image'] ?>" class="rounded" style="width: 50px;" alt="">
-                    <p  class="mx-3"><?php  echo $user['username'] ?></p>
+                    <img src="images/proxy.jpg" class="rounded" style="width: 50px;" alt="">
+                    <p  class="mx-3">Admin</p>
                 </div>
             </div>
         </div>
@@ -63,13 +65,13 @@ include_once 'database.php';
     <div class="container align-center">
         <div class="row my-2">
             <div class="col-12">
-                <h2>Add User</h2>
+                <h2>Update User</h2>
             </div>
         </div>
        
-        <form action="handle_adduser.php" method="post" class="card align-center"  enctype="multipart/form-data">
-        <?php if (isset($_SESSION['errors']['user'])) {
-                foreach ($_SESSION['errors']['user'] as $err_user) {?>
+        <form action="handle_updateuser.php" method="post" class="card align-center"  enctype="multipart/form-data">
+        <?php if (isset($_SESSION['updated_user_error'])) {
+                foreach ($_SESSION['updated_user_error'] as $err_user) {?>
                 
                
             
@@ -83,23 +85,24 @@ include_once 'database.php';
                 </div>
 
 
-            <?php } }  session_unset() ?>
+            <?php } }  unset($_SESSION['updated_user_error']) ?>
             <div class="row ">
                 <div class="col-12">
                     <div class="text-center p-3  mx-auto my-3">
+                        <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
                         <div class="mb-3 row  ">
                             <label  class="col-sm-3 col-form-label"> Name</label>
                             <div class="col-sm-8">
-                            <input type="text"  class="form-control" placeholder="Enter Name" name="name" >
+                            <input type="text"  class="form-control" placeholder="Enter Name" name="username"  value="<?php echo $user['username'] ?>">
                             </div>
                         </div>
                         <div class="mb-3 row  ">
                             <label  class="col-sm-3 col-form-label"> email</label>
                             <div class="col-sm-8">
-                            <input type="email"  class="form-control" placeholder="Enter email" name="email" >
+                            <input type="email"  class="form-control" placeholder="Enter email" name="email"  value="<?php echo $user['email'] ?>">
                             </div>
                         </div>
-                        <div class="mb-3 row  ">
+                        <!-- <div class="mb-3 row  ">
                             <label  class="col-sm-3 col-form-label"> password</label>
                             <div class="col-sm-8">
                             <input type="password"  class="form-control" placeholder="Enter password" name="password" >
@@ -110,24 +113,27 @@ include_once 'database.php';
                             <div class="col-sm-8">
                             <input type="password"  class="form-control" placeholder="Enter Confirm_password" name="confirm_password" >
                             </div>
-                        </div>
+                        </div> -->
                         <div class="mb-3 row">
                             <label for="inputPassword" class="col-sm-3 col-form-label">Room no</label>
                             <div class="col-sm-8">                          
-                                    <input type="number" name="room_no" placeholder="2" class="form-control " > 
+                                    <input type="number" name="room_no" placeholder="2" class="form-control " value="<?php echo $user['room_no'] ?>" > 
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="inputPassword" class="col-sm-3 col-form-label">Ext</label>
                             <div class="col-sm-8">                          
-                                    <input type="number" placeholder="2" name="ext" class="form-control " > 
+                                    <input type="number" placeholder="2" name="ext" class="form-control " value="<?php echo $user['ext'] ?>"> 
                             </div>
                         </div>
 
                         <div class="mb-3 ">
+                            <div class="row w-50 m-auto">
+                                <img src="<?php echo $user['image'] ?>" style="max-height:250px" alt="image">
+                            </div>
                             <div class="row">
                                 
-                                    <label class="col-sm-3 col-form-label">User Picture</label>
+                                <label class="col-sm-3 col-form-label">User Picture</label>
                                 
                                 <div class="col-8">
                                     <div class="input-group mb-3">
@@ -138,7 +144,7 @@ include_once 'database.php';
                         
                         </div>    
                         <div class="w-100 text-center mx-auto my-5 ">
-                            <button class="btn btn-primary" type="submit">save</button>
+                            <button class="btn btn-primary" type="submit">Update</button>
                             <button class="btn btn-secondary" type="reset" >reset</button>
 
                         </div>

@@ -1,6 +1,11 @@
 <?php
     session_start();
     include_once 'database.php';
+    $query10 = "SELECT * FROM users where is_admin = 1"  ;          
+    $sql10 = $conn->prepare($query10);
+    $result  = $sql10->execute();
+    
+    $user = $sql10->fetch();
     if(isset($_GET)){
 
             $query = 'SELECT * FROM products'  ;          
@@ -9,19 +14,10 @@
             
             $products = $sql->fetchAll();
 
-            // if(empty($categories)){
-            //     $_SESSION['email'] = $email;
-            //     header('location:homepage.php');
-            // }else{
-            //     $_SESSION['error_login'] = 'not aauthencable';
-            //     header('location:login.php');
-            // }
-            // $query = `Update  users set id=$id ,first_name =$first_name ,last_name=$last_name , phone = $phone 
-            
-            //         department = $department,salary=$salary ,joining_data =$date WHERE id =$id`;
-    
-        
-
+    }
+    if(isset($_SESSION['products'])){
+        $products =$_SESSION['products'];
+        unset($_SESSION['products']);
     }
 
 ?>
@@ -52,7 +48,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link active border-end" aria-current="page" href="#">Home</a>
+                <a class="nav-link active border-end" aria-current="page" href="homepage.php">Home</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link border-end" href="all_products.php">Products</a>
@@ -70,9 +66,17 @@
                
             </ul>
                 <div class="d-flex">
-                    <img src="images/proxy.jpg" class="rounded" style="width: 50px;" alt="">
-                    <p  class="mx-3">Admin</p>
+                <form action="handle_search.php" method="post" class="d-flex" role="search w-100">
+                            <input class="form-control me-2  text-dark border-0 " name="search_product"  type="search" placeholder="Search"
+                                aria-label="Search">
+                            <button class="btn btn-outline-success me-3" name="search_button_product" type="submit">Search</button>
+                 </form>
+                    <img src="<?php  echo $user['image'] ?>" class="rounded" style="width: 50px;" alt="">
+                    <p  class="mx-3"><?php  echo $user['username'] ?></p>
                 </div>
+                <p class="mx-1 ">
+                        <a class="btn btn-secondary mx-1 " href="logout.php">logout</a>
+                    </p>
             </div>
         </div>
     </nav>
@@ -132,21 +136,13 @@
                                         </td>
                                         
                                         <td>
-                                            <a href="edit.php?id=<?php echo $product['id'] ?>">Update</a>
-                                            <a href="./delete/product.php?id=<?php echo $product['id'] ?>">delete</a>
+                                            <a class="btn btn-secondary" href="edit_product.php?id=<?php echo $product['id'] ?>">Update</a>
+                                            <a class="btn btn-danger" href="./delete/product.php?id=<?php echo $product['id'] ?>">delete</a>
 
                                         </td>
                                         
                                     </tr>
-                                    <?php  if(isset($_SESSION['deleted'])){?>
-                                                <span class="alert alert-danger">
-                                                    <?php  echo $_SESSION['deleted']; 
-                                                    unset($_SESSION['deleted']);
-                                                    ?>
-                                                    
-                                                </span>
-                                                
-                                            <?php }  ?>
+                                   
                             
                         
                         <?php }
