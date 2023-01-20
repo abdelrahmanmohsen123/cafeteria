@@ -63,14 +63,14 @@
                 <li class="nav-item">
                     <a class="nav-link border-end" href="all_users.php">Users</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link border-end" href="admin_orders.php">All Orders</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link border-end" href="homepage.php">Manual Order</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link border-end" href="#">Checks</a>
+                    <a class="nav-link border-end" href="admin_orders.php">Checks</a>
                 </li>
                 <?php }?>
                       

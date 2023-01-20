@@ -12,7 +12,7 @@
         $result  = $sql10->execute();
         
         $user = $sql10->fetch();
-        if($now_email == "admin@gmail.com"){
+        if($user['is_admin'] == 1){
             $admin = 1;
         }else{
             $admin = 0;
@@ -290,14 +290,12 @@
                 <li class="nav-item">
                     <a class="nav-link border-end" href="all_users.php">Users</a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link border-end" href="admin_orders.php">All Orders</a>
+                    <a class="nav-link border-end" href="homepage.php">Manual Order</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link border-end" href="#">Manual Order</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link border-end" href="#">Checks</a>
+                    <a class="nav-link border-end" href="admin_orders.php">Checks</a>
                 </li>
                 <?php }else{ ?>
                     <li class="nav-item">

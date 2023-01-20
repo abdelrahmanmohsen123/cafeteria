@@ -1,6 +1,13 @@
 <?php 
 session_start();
 include 'database.php';
+$query2 = 'SELECT * FROM USERS WHERE is_admin =1'  ;          
+$sql2 = $conn->prepare($query2);
+$result2  = $sql2->execute();
+
+$admin = $sql2->fetch();
+
+
 if(isset($_GET['id'])){
     $id_user = $_GET['id'];
     $query = 'SELECT * FROM USERS WHERE id = ?'  ;          
@@ -54,9 +61,12 @@ if(isset($_GET['id'])){
                
             </ul>
                 <div class="d-flex">
-                    <img src="images/proxy.jpg" class="rounded" style="width: 50px;" alt="">
-                    <p  class="mx-3">Admin</p>
+                <img src="<?php  echo $admin['image'] ?>" class="rounded" style="width: 50px;" alt="">
+                    <p  class="mx-3"><?php  echo $admin['username'] ?></p>
                 </div>
+                <p class="mx-1 ">
+                        <a class="btn btn-secondary mx-1 " href="logout.php">logout</a>
+                    </p>
             </div>
         </div>
     </nav>

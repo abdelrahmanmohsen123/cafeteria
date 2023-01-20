@@ -1,6 +1,12 @@
 <?php
 session_start();
+
 include_once 'database.php';
+$query10 = "SELECT * FROM users where is_admin = 1"  ;          
+$sql10 = $conn->prepare($query10);
+$result  = $sql10->execute();
+
+$user = $sql10->fetch();
 if (isset($_GET)) {
 
     $query = 'SELECT * FROM category';
@@ -8,19 +14,6 @@ if (isset($_GET)) {
     $result  = $sql->execute();
 
     $categories = $sql->fetchAll();
-
-    // if(empty($categories)){
-    //     $_SESSION['email'] = $email;
-    //     header('location:homepage.php');
-    // }else{
-    //     $_SESSION['error_login'] = 'not aauthencable';
-    //     header('location:login.php');
-    // }
-    // $query = `Update  users set id=$id ,first_name =$first_name ,last_name=$last_name , phone = $phone 
-
-    //         department = $department,salary=$salary ,joining_data =$date WHERE id =$id`;
-
-
 
 }
 
@@ -52,7 +45,7 @@ if (isset($_GET)) {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active border-end" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active border-end" aria-current="page" href="homepage.php">Home</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link border-end" href="all_products.php">Products</a>
@@ -61,17 +54,18 @@ if (isset($_GET)) {
                         <a class="nav-link border-end" href="all_users.php">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link border-end" href="#">Manual Order</a>
+                            <a class="nav-link border-end" href="homepage.php">Manual Order</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link border-end" href="#">Checks</a>
+                            <a class="nav-link border-end" href="admin_orders.php">Checks</a>
                         </li>
 
 
                     </ul>
                     <div class="d-flex">
-                        <img src="images/proxy.jpg" class="rounded" style="width: 50px;" alt="">
-                        <p class="mx-3">Admin</p>
+                    <img src="<?php  echo $user['image'] ?>" class="rounded" style="width: 50px;" alt="">
+                    <p  class="mx-3"><?php  echo $user['username'] ?></p>
+
                     </div>
                 </div>
             </div>

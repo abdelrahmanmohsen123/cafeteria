@@ -47,7 +47,7 @@
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link active border-end" aria-current="page" href="homepage.php">Home</a>
                 </li>
                 <li class="nav-item">
@@ -57,10 +57,10 @@
                 <a class="nav-link border-end" href="all_users.php">Users</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link border-end" href="#">Manual Order</a>
+                <a class="nav-link border-end" href="homepage.php">Manual Order</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link border-end" href="#">Checks</a>
+                <a class="nav-link border-end" href="admin_orders">Checks</a>
                 </li>
                
                

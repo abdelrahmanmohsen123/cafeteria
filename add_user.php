@@ -46,7 +46,7 @@ include_once 'database.php';
                 <a class="nav-link border-end" href="homepage.php">Manual Order</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link border-end" href="#">Checks</a>
+                <a class="nav-link border-end" href="admin_orders">Checks</a>
                 </li>
                
                
